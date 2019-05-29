@@ -1,0 +1,8 @@
+env
+.idea
+*.pyc
+src/hs/media
+src/hs/media_dir
+src/hs/static
+src/hs/static_dir
+src/hs/settings/local.py
