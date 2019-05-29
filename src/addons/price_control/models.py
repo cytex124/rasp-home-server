@@ -6,7 +6,7 @@ import decimal
 from django.contrib.auth.models import User
 
 
-class ProductPriceControl(models.Model):
+class Product(models.Model):
     name = models.CharField(max_length=256, null=False, blank=False)
     img = models.ImageField(null=True, blank=True)
     wish_price = models.DecimalField(max_digits=8, decimal_places=2)
@@ -18,10 +18,10 @@ class ProductPriceControl(models.Model):
         verbose_name_plural = 'Products'
 
     def __str__(self):
-        return '{}'.format(self.name)
+        return self.name
 
 
-class PriceControlPage(models.Model):
+class Page(models.Model):
     WEB_PAGES = (
         ('kotte-zeller.de', 'https://www.kotte-zeller.de'),
         ('softairstore.de', 'https://www.softairstore.de'),
@@ -31,7 +31,7 @@ class PriceControlPage(models.Model):
     )
     web_page = models.CharField(max_length=64, choices=WEB_PAGES, null=False, blank=False)
     suffix_url = models.CharField(max_length=256, null=False, blank=False)
-    product = models.ForeignKey(ProductPriceControl, on_delete=models.SET_NULL, null=True)
+    product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)
 
     class Meta:
         verbose_name = 'Price Control Page'
@@ -69,14 +69,14 @@ class PriceControlPage(models.Model):
         return price
 
 
-class AuditControl(models.Model):
+class AuditLog(models.Model):
     price = models.DecimalField(max_digits=8, decimal_places=2)
-    price_control_page = models.ForeignKey(PriceControlPage, on_delete=models.SET_NULL, null=True)
+    page = models.ForeignKey(Page, on_delete=models.SET_NULL, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        verbose_name = 'Audit'
-        verbose_name_plural = 'Audit'
+        verbose_name = 'Auditlog'
+        verbose_name_plural = 'Auditlogs'
 
     def __str__(self):
-        return '{}: {}'.format(self.price_control_page, self.price)
+        return '{}: {}'.format(self.page, self.price)
