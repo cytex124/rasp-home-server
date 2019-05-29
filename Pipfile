@@ -1,0 +1,35 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+
+[packages]
+django = "*"
+jinja2 = "*"
+djangorestframework = "*"
+markdown = "*"
+django-filter = "*"
+django-auth-adfs = "*"
+pyjwt = "*"
+cryptography = "==2.3.1"
+requests = "*"
+django-redis = "*"
+paramiko = "==2.1.2"
+drf-yasg = {extras = ["validation"],version = "*"}
+psycopg2 = "*"
+django-cors-headers = "*"
+pytz = "*"
+django-model-utils = "*"
+celery = "*"
+django-celery-beat = "*"
+django-debug-toolbar = "*"
+greenlet = "*"
+gunicorn = "*"
+eventlet = "*"
+pillow = "*"
+beautifulsoup4 = "*"
+
+[requires]
+python_version = "3.7"
