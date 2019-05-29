@@ -31,7 +31,7 @@ class Page(models.Model):
     )
     web_page = models.CharField(max_length=64, choices=WEB_PAGES, null=False, blank=False)
     suffix_url = models.CharField(max_length=256, null=False, blank=False)
-    product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)
+    product = models.ForeignKey(Product, related_name='pages', on_delete=models.SET_NULL, null=True)
 
     class Meta:
         verbose_name = 'Price Control Page'
@@ -71,7 +71,7 @@ class Page(models.Model):
 
 class AuditLog(models.Model):
     price = models.DecimalField(max_digits=8, decimal_places=2)
-    page = models.ForeignKey(Page, on_delete=models.SET_NULL, null=True)
+    page = models.ForeignKey(Page, related_name='audit_logs', on_delete=models.SET_NULL, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
