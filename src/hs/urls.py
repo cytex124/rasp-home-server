@@ -54,4 +54,6 @@ urlpatterns = [
 
     path('admin/', admin.site.urls),
     re_path(r'^{0}(?P<path>.*)$'.format(settings.MEDIA_URL[1:]), protected_serve, {'document_root': settings.MEDIA_ROOT}),
+
+    path('api/v1/pricecontroll/', include('addons.price_control.urls'))
 ]
