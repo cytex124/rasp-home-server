@@ -6,10 +6,10 @@ from rest_framework.response import Response
 from rest_framework import status
 from .serializers import PageSerializer, AuditLogSerializer, ProductSerializer
 from .models import Page, AuditLog, Product
+from rest_framework_tracking.mixins import LoggingMixin
 
 
-class PriceControlPageViewSet(viewsets.ReadOnlyModelViewSet):
-
+class PriceControlPageViewSet(LoggingMixin, viewsets.ReadOnlyModelViewSet):
     serializer_class = PageSerializer
     permission_classes = (IsAuthenticated, )
 
@@ -19,7 +19,7 @@ class PriceControlPageViewSet(viewsets.ReadOnlyModelViewSet):
         return Page.objects.filter(product__alarm_user=self.request.user)
 
 
-class AuditViewSet(APIView):
+class AuditViewSet(LoggingMixin, APIView):
     serializer_class = AuditLogSerializer
     permission_classes = (IsAuthenticated, )
 
