@@ -1,6 +1,9 @@
 from .base import *
 from corsheaders.defaults import default_headers
 import os
+import sentry_sdk
+from sentry_sdk.integrations.django import DjangoIntegration
+
 
 SECRET_KEY = os.environ['SECRET_KEY']
 
@@ -52,3 +55,8 @@ EMAIL_HOST = os.environ['HS_EMAIL_HOST']
 EMAIL_PORT = os.environ['HS_EMAIL_PORT']
 EMAIL_HOST_USER = os.environ['HS_EMAIL_USER']
 EMAIL_HOST_PASSWORD = os.environ['HS_EMAIL_PW']
+
+sentry_sdk.init(
+    dsn=os.environ('SENTRY_URL'),
+    integrations=[DjangoIntegration()]
+)

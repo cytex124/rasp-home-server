@@ -30,6 +30,7 @@ gunicorn = "*"
 eventlet = "*"
 pillow = "*"
 beautifulsoup4 = "*"
+sentry-sdk = "*"
 
 [requires]
 python_version = "3.7"
