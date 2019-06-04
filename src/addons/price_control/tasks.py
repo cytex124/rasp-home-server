@@ -1,11 +1,15 @@
 from __future__ import absolute_import, unicode_literals
 from celery import task
 from .models import Page, AuditLog, Product
-from django.core.mail import EmailMessage
 
 
 @task
 def collect_pricecontrol_data():
+    """
+    Collect Pricecontrol data. So every Product with every Page gets a new AuditLog with the current price.
+    If wishprice is reached send mail to user.
+    :return: None
+    """
     for page in Page.objects.all():
         price = page.get_current_price()
         audit_obj = AuditLog.objects.create(price=price, page=page)
@@ -19,9 +23,4 @@ def collect_pricecontrol_data():
                 lowest = latest_audit
 
         if lowest.price <= product.wish_price:
-            email = EmailMessage(
-                'Price Alarm: {}'.format(product.name),
-                'See here: {}'.format(lowest.page.get_url()),
-                to=[product.alarm_user.email]
-            )
-            email.send()
+            product.send_mail(audit_log=lowest)

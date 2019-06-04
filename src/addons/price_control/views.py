@@ -22,6 +22,9 @@ class AuditViewSet(APIView):
     permission_classes = (IsAuthenticated, )
 
     def get(self, request, format=None, *args, **kwargs):
+        """
+        Returns a Response with AuditLogs and Product-Infos of a Product-Object.
+        """
         product_id = kwargs.get('id', None)
         product = get_object_or_404(Product, id=product_id)
         audit_logs = AuditLog.objects.filter(page__product=product).order_by('page', '-created_at')[0:1000]

@@ -4,9 +4,13 @@ from bs4 import BeautifulSoup
 import locale
 import decimal
 from django.contrib.auth.models import User
+from django.core.mail import EmailMessage
 
 
 class Product(models.Model):
+    """
+    A Product object to notify a specific user.
+    """
     name = models.CharField(max_length=256, null=False, blank=False)
     img = models.ImageField(null=True, blank=True)
     wish_price = models.DecimalField(max_digits=8, decimal_places=2)
@@ -18,11 +22,27 @@ class Product(models.Model):
         verbose_name_plural = 'Products'
         ordering = ('alarm_user', 'name')
 
+    def send_mail(self, audit_log):
+        """
+        Send mail with price-alarm.
+        :param audit_log: AuditLog-Model-Object
+        :return: None
+        """
+        email = EmailMessage(
+            'Price Alarm: {}'.format(self.name),
+            'See here: {}'.format(audit_log.page.get_url()),
+            to=[self.alarm_user.email]
+        )
+        email.send()
+
     def __str__(self):
         return self.name
 
 
 class Page(models.Model):
+    """
+    Page Object is used to get price of product (X Pages for 1 Product) to compare prices on different pages.
+    """
     WEB_PAGES = (
         ('kotte-zeller.de', 'https://www.kotte-zeller.de', '_get_price_from_kotte_zeller_de'),
         ('softairstore.de', 'https://www.softairstore.de', '_get_price_from_softairstore_de'),
@@ -43,14 +63,31 @@ class Page(models.Model):
         return '{0}{1}: {2}'.format(self.web_page, self.suffix_url, self.product)
 
     def get_url(self):
+        """
+        Get complete URL of Page-Object
+        :return:
+        url: string - example https://www.kotte-zeller.de/src-sr4-pe-light-sport-series-aeg-6mm-bb-schwarz
+        """
         return '{0}{1}'.format(dict([(wp[0], wp[1]) for wp in self.WEB_PAGES])[self.web_page], self.suffix_url)
 
     def get_current_price(self):
+        """
+        Get Price of Product on Webpage
+        :return:
+        price: Decimal - example Decimal(400.00)
+        """
         response = requests.get(self.get_url())
         soup = BeautifulSoup(response.content, features="html.parser")
         return self._get_price(soup)
 
     def _get_price(self, soup):
+        """
+        Get Price of bs4 soup object on webpage.
+        :param
+        soup: BS-Object - example BeautifulSoup(response.content, features="html.parser")
+        :return:
+        price: Decimal - example Decimal(400.00)
+        """
         price_text = None
         locale.setlocale(locale.LC_ALL, 'de_DE')
         for wp in self.WEB_PAGES:
@@ -82,6 +119,9 @@ class Page(models.Model):
 
 
 class AuditLog(models.Model):
+    """
+    Auditlog of a Product on a Page. Just for logging reasons.
+    """
     price = models.DecimalField(max_digits=8, decimal_places=2)
     page = models.ForeignKey(Page, related_name='audit_logs', on_delete=models.SET_NULL, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
