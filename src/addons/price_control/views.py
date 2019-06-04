@@ -14,6 +14,8 @@ class PriceControllPageViewSet(viewsets.ReadOnlyModelViewSet):
     permission_classes = (IsAuthenticated, )
 
     def get_queryset(self):
+        if not self.request.user.is_authenticated:
+            return Response(status=status.HTTP_401_UNAUTHORIZED)
         return Page.objects.filter(product__alarm_user=self.request.user)
 
 
