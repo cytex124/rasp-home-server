@@ -1,0 +1,1 @@
+default_app_config = "addons.price_control.apps.PriceControlConfig"
