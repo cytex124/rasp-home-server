@@ -4,7 +4,7 @@ from . import views
 
 # Create a router and register our viewsets with it.
 router = DefaultRouter()
-router.register(r'pages', views.PriceControllPageViewSet, basename='Page')
+router.register(r'pages', views.PriceControlPageViewSet, basename='Page')
 
 # The API URLs are now determined automatically by the router.
 urlpatterns = [

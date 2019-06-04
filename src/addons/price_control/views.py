@@ -8,7 +8,7 @@ from .serializers import PageSerializer, AuditLogSerializer, ProductSerializer
 from .models import Page, AuditLog, Product
 
 
-class PriceControllPageViewSet(viewsets.ReadOnlyModelViewSet):
+class PriceControlPageViewSet(viewsets.ReadOnlyModelViewSet):
 
     serializer_class = PageSerializer
     permission_classes = (IsAuthenticated, )
