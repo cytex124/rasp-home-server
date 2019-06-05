@@ -89,7 +89,7 @@ class Page(models.Model):
         price: Decimal - example Decimal(400.00)
         """
         price_text = None
-        locale.setlocale(locale.LC_ALL, 'de_DE')
+        locale.setlocale(locale.LC_ALL, 'de_DE.utf-8')
         for wp in self.WEB_PAGES:
             if wp[0] == self.web_page:
                 price_text = eval('self.{}(soup)'.format(wp[2]))
