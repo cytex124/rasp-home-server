@@ -57,6 +57,6 @@ EMAIL_HOST_USER = os.environ['HS_EMAIL_USER']
 EMAIL_HOST_PASSWORD = os.environ['HS_EMAIL_PW']
 
 sentry_sdk.init(
-    dsn=os.environ('SENTRY_URL'),
+    dsn=os.environ['SENTRY_URL'],
     integrations=[DjangoIntegration()]
 )
