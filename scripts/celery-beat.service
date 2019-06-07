@@ -1,0 +1,14 @@
+[Unit]
+Description=celery beat
+After=network.target
+
+[Service]
+User=username
+Group=groupname
+WorkingDirectory=/path/to/rasp-home-server/src
+ExecStart=/path/to/bin/celery -A hs beat -l info --workdir /path/to/rasp-home-server/src
+EnvironmentFile=/path/to/env.txt
+
+[Install]
+WantedBy=multi-user.target
+
