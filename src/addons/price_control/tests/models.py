@@ -24,6 +24,11 @@ class PageTest(TestCase):
                 'web_page': 'kotte-zeller.de'
             },
             {
+                'url': 'https://www.kotte-zeller.de/umarex-heckler-koch-usp-metallschlitten-komplettset-aep-6mm-bb-schwarz-4',
+                'suffix': '/umarex-heckler-koch-usp-metallschlitten-komplettset-aep-6mm-bb-schwarz-4',
+                'web_page': 'kotte-zeller.de'
+            },
+            {
                 'url': 'https://www.softairstore.de/waffen/langwaffen/s-aeg-18/maschinenpistolen/kriss-vector/14099/kriss-vector-airsoft-in-schwarz-f-krytac',
                 'suffix': '/waffen/langwaffen/s-aeg-18/maschinenpistolen/kriss-vector/14099/kriss-vector-airsoft-in-schwarz-f-krytac',
                 'web_page': 'softairstore.de'

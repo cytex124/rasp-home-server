@@ -103,7 +103,10 @@ class Page(models.Model):
             return decimal.Decimal(price_text)
 
     def _get_price_from_kotte_zeller_de(self, soup):
-        return soup.find_all('div', 'pr-price-normal')[0].find_all('span')[0].text
+        try:
+            return soup.find_all('div', 'pr-price-org')[0].find_all('span')[1].text
+        except IndexError as _:
+            return soup.find_all('div', 'pr-price-normal')[0].find_all('span')[0].text
 
     def _get_price_from_softairstore_de(self, soup):
         return soup.find_all('span', 'price--content')[0].find_all('meta')[0].get('content')
