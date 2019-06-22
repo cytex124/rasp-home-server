@@ -4,9 +4,9 @@ from celery import Celery
 
 
 # set the default Django settings module for the 'celery' program.
-# os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'hs.settings.local')
+# os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'homeserver.settings.local')
 
-app = Celery('hs')
+app = Celery('homeserver')
 
 app.config_from_object('django.conf:settings', namespace='CELERY')
 app.autodiscover_tasks(packages=["addons.price_control", ])

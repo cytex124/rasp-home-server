@@ -28,7 +28,7 @@ MIDDLEWARE = [
     'django.middleware.locale.LocaleMiddleware'
 ]
 
-ROOT_URLCONF = 'hs.urls'
+ROOT_URLCONF = 'homeserver.urls'
 
 TEMPLATES = [
     {
@@ -46,7 +46,7 @@ TEMPLATES = [
     }
 ]
 
-WSGI_APPLICATION = 'hs.wsgi.application'
+WSGI_APPLICATION = 'homeserver.wsgi.application'
 
 AUTH_PASSWORD_VALIDATORS = [
     {

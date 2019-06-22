@@ -6,7 +6,7 @@ After=network.target
 User=username
 Group=groupname
 WorkingDirectory=/path/to/rasp-home-server/src
-ExecStart=/path/to/bin/celery -A hs worker -l info -E --pool=eventlet --workdir /path/to/rasp-home-server/src
+ExecStart=/path/to/bin/celery -A homeserver worker -l info -E --pool=eventlet --workdir /path/to/rasp-home-server/src
 EnvironmentFile=/path/to/env.txt
 
 [Install]
