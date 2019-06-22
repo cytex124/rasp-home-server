@@ -2,8 +2,8 @@ env
 venv
 .idea
 *.pyc
-src/hs/media
-src/hs/media_dir
-src/hs/static
-src/hs/static_dir
-src/hs/settings/local.py
+src/homeserver/media
+src/homeserver/media_dir
+src/homeserver/static
+src/homeserver/static_dir
+src/homeserver/settings/local.py
