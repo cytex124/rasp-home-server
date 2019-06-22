@@ -14,6 +14,7 @@ INSTALLED_APPS = [
     'rest_framework_tracking',
     'drf_yasg',
     'addons.price_control',
+    'addons.odoo_sales_check',
 ]
 
 MIDDLEWARE = [

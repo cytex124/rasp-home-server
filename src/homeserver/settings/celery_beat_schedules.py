@@ -18,3 +18,8 @@ CELERY_BEAT_SCHEDULE['audit_price_control'] = {
     'task': 'addons.price_control.tasks.collect_pricecontrol_data',
     'schedule': crons['every_2_hours'],
 }
+
+CELERY_BEAT_SCHEDULE['check_odoo_sales'] = {
+    'task': 'addons.odoo_sales_check.tasks.check_odoo_sales',
+    'schedule': crons['every_2_hours'],
+}
