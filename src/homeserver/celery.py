@@ -9,4 +9,4 @@ from celery import Celery
 app = Celery('homeserver')
 
 app.config_from_object('django.conf:settings', namespace='CELERY')
-app.autodiscover_tasks(packages=["addons.price_control", ])
+app.autodiscover_tasks(packages=["addons.price_control", "addons.odoo_sales_check"])
