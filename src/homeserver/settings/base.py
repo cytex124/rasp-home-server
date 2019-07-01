@@ -15,6 +15,7 @@ INSTALLED_APPS = [
     'drf_yasg',
     'addons.price_control',
     'addons.odoo_sales_check',
+    'addons.novarock_voting_bot'
 ]
 
 MIDDLEWARE = [
