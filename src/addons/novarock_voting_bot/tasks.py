@@ -2,6 +2,7 @@ import requests
 from .models import Band, Proxy, Vote
 from time import sleep
 from random import randint
+from celery import task
 
 
 @task
