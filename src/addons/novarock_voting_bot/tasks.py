@@ -4,6 +4,7 @@ from time import sleep
 from random import randint
 
 
+@task
 def vote_on_novarock_page():
     sleep(randint(0, 300))
     proxy = Proxy.get_random()

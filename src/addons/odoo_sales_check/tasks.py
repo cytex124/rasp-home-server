@@ -3,8 +3,9 @@ import requests
 from bs4 import BeautifulSoup
 import decimal
 from django.core.mail import EmailMessage
+from celery import task
 
-
+@task
 def check_odoo_sales():
     for repo in RepoMaintainer.objects.all():
         product_links = repo.get_product_links()
